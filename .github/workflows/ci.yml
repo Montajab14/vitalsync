@@ -39,6 +39,13 @@ jobs:
           export default [
             js.configs.recommended,
             {
+              languageOptions: {
+                globals: {
+                  require: "readonly",
+                  console: "readonly",
+                  process: "readonly"
+                }
+              },
               rules: {
                 "no-unused-vars": "warn",
                 "no-console": "off"
