@@ -1,0 +1,44 @@
+services:
+  backend:
+    build: ./backend
+    container_name: vitalsync-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - database
+    networks:
+      - vitalsync-network
+
+  frontend:
+    build: ./frontend
+    container_name: vitalsync-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - vitalsync-network
+
+  database:
+    image: postgres:16-alpine
+    container_name: vitalsync-db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - vitalsync-network
+
+networks:
+  vitalsync-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
