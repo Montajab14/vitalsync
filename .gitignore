@@ -1,0 +1,25 @@
+# Dépendances Node.js
+node_modules/
+
+# Variables d'environnement sensibles
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Docker
+.dockerignore
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Coverage Jest
+coverage/
+
+# Build frontend
+dist/
+build/
